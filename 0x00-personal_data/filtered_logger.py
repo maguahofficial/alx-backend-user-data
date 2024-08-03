@@ -49,7 +49,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 class RedactingFormatter(logging.Formatter):
-    """ Its Redacting a Formatter class
+    """ Its redacting a Formatter class
     """
 
     REDACTION = "***"
@@ -62,7 +62,8 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        """ Function filters values in incoming log records using filter_datum """
+        """ Function 
+        filters values in incoming log records using filter_datum """
         record.msg = filter_datum(self.fields, self.REDACTION,
                                   record.getMessage(), self.SEPARATOR)
         return super(RedactingFormatter, self).format(record)
