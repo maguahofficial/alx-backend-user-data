@@ -91,7 +91,8 @@ class Auth:
         return token
 
     def update_password(self, reset_token: str, password: str) -> None:
-        """ (function) hash the password and update the user’s hashed_password field with
+        """ (function) hash the password and update the
+            user’s hashed_password field with
             the new hashed password and the reset_token field to None """
         try:
             user = self._db.find_user_by(reset_token=reset_token)
