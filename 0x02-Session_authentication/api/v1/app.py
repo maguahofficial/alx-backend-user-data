@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-The Route module for the API
+Route module for the API
 """
 from os import getenv
 from api.v1.views import app_views
@@ -27,26 +27,26 @@ elif AUTH_TYPE == "session_auth":
 
 @app.errorhandler(401)
 def unauthorized(error) -> str:
-    """ error function handler for (unauthorized) 401 status code """
+    """ error handler for (unauthorized) 401 status code """
     return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(403)
 def forbidden(error) -> str:
-    """ error function handler for (forbidden) 403 status code """
+    """ error handler for (forbidden) 403 status code """
     return jsonify({"error": "Forbidden"}), 403
 
 
 @app.errorhandler(404)
 def not_found(error) -> str:
-    """ (function) Not found handler
+    """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
 
 
 @app.before_request
 def before_request() -> str:
-    """ function to handler before request """
+    """ method to handler before request """
     if auth is None:
         return
     excluded_paths = ['/api/v1/status/',

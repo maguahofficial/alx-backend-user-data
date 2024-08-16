@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-""" The Auth class, Require auth with stars """
+""" Auth class, Require auth with stars """
 from flask import request
 from typing import List, TypeVar
 from os import getenv
 
 
 class Auth():
-    """This class manages the API authentication """
+    """ manage the API authentication """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ require authorithation """
         if path is None or excluded_paths is None or not len(excluded_paths):
@@ -23,7 +23,7 @@ class Auth():
             return True
 
     def authorization_header(self, request=None) -> str:
-        """(function) authorization header """
+        """ authorization header """
         if request is None:
             return None
         if not request.headers.get("Authorization"):
@@ -31,11 +31,11 @@ class Auth():
         return request.headers.get("Authorization")
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """ the current user """
+        """ current user """
         return None
 
     def session_cookie(self, request=None):
-        """ function returns a cookie value from a request """
+        """ returns a cookie value from a request """
         if request is None:
             return None
         session_name = getenv('SESSION_NAME')

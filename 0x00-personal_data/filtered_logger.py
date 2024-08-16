@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-The Module for handling Personal Data
+A Module for handling Personal Data
 """
 import logging
 import mysql.connector
@@ -14,7 +14,7 @@ PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
-    """ Function Returns a log message obfuscated """
+    """ Returns a log message obfuscated """
     for f in fields:
         message = re.sub(f'{f}=.*?{separator}',
                          f'{f}={redaction}{separator}', message)
@@ -22,7 +22,7 @@ def filter_datum(fields: List[str], redaction: str,
 
 
 def get_logger() -> logging.Logger:
-    """ Function returns a Logger Object """
+    """ Returns a Logger Object """
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
     logger.propagate = False
@@ -35,7 +35,7 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    """ Function returns connector to a MySQL database """
+    """ Returns connector to a MySQL database """
     username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
     password = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
     host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
@@ -49,7 +49,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 class RedactingFormatter(logging.Formatter):
-    """ Its redacting a Formatter class
+    """ Redacting a Formatter class
     """
 
     REDACTION = "***"
@@ -57,13 +57,12 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
-        """ (function) A Constructor Method """
+        """ a Constructor Method """
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        """ Function 
-        filters values in incoming log records using filter_datum """
+        """ Filters values in incoming log records using filter_datum """
         record.msg = filter_datum(self.fields, self.REDACTION,
                                   record.getMessage(), self.SEPARATOR)
         return super(RedactingFormatter, self).format(record)
@@ -71,8 +70,7 @@ class RedactingFormatter(logging.Formatter):
 
 def main():
     """
-    function
-    obtains a database connection using get_db and retrieves all rows
+    Obtains a database connection using get_db and retrieves all rows
     in the users table and display each row under a filtered format
     """
     db = get_db()

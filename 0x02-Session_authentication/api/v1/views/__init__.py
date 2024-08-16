@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-""" Importing the Blueprint class from Flask to
-create a blueprint for our application views.
+""" DocDocDocDocDocDoc
 """
 from flask import Blueprint
 

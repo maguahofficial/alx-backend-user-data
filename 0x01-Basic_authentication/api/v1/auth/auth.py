@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-""" the Auth class, Require auth with stars """
+""" Auth class, Require auth with stars """
 from flask import request
 from typing import List, TypeVar
 
 
 class Auth():
-    """ class manages the API authentication """
+    """ manage the API authentication """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ (function)require authorithation """
+        """ require authorithation """
         if path is None or excluded_paths is None or not len(excluded_paths):
             return True
         if path[-1] != '/':
@@ -22,7 +22,7 @@ class Auth():
             return True
 
     def authorization_header(self, request=None) -> str:
-        """ authorization header function"""
+        """ authorization header """
         if request is None:
             return None
         if not request.headers.get("Authorization"):
@@ -30,5 +30,5 @@ class Auth():
         return request.headers.get("Authorization")
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """ current user function """
+        """ current user """
         return None
